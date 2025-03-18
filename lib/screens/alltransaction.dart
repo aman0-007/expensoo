@@ -373,29 +373,45 @@ class _AllTransactionsPageState extends State<AllTransactionsPage> {
 
   @override
   Widget build(BuildContext context) {
-
     List<String> uniqueBanks = _allTransactions.map((t) => t.bankName).toSet().toList();
-
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Transactions'),
         actions: [
-          PopupMenuButton<String>(
-            onSelected: _filterTransactions,
-            itemBuilder: (context) {
-              return [
-                const PopupMenuItem(value: 'Date', child: Text('Filter by Date')),
-                const PopupMenuItem(value: 'Bank', child: Text('Filter by Bank')),
-                const PopupMenuItem(value: 'Amount', child: Text('Filter by Amount')),
-              ];
-            },
-          ),
+          if (uniqueBanks.isNotEmpty || _filteredTransactions.isNotEmpty)
+            PopupMenuButton<String>(
+              onSelected: _filterTransactions,
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem(value: 'Date', child: Text('Filter by Date')),
+                  const PopupMenuItem(value: 'Bank', child: Text('Filter by Bank')),
+                  const PopupMenuItem(value: 'Amount', child: Text('Filter by Amount')),
+                ];
+              },
+            ),
         ],
       ),
       body: Column(
         children: [
-          Container(
+          // Handle case when there are no unique banks
+          uniqueBanks.isEmpty
+              ? Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.warning_amber_rounded, size: 80, color: Colors.grey[400]),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'No banks available',
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          )
+              : Container(
             color: Colors.grey[200],
             padding: const EdgeInsets.all(12.0),
             child: SingleChildScrollView(
@@ -510,7 +526,25 @@ class _AllTransactionsPageState extends State<AllTransactionsPage> {
               ),
             ),
           ),
-          Expanded(
+
+          // Handle case when there are no transactions
+          _filteredTransactions.isEmpty
+              ? Expanded(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.warning_amber_rounded, size: 80, color: Colors.grey[400]),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'No transactions found',
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          )
+              : Expanded(
             child: Container(
               color: Colors.white, // Set the background color to white
               child: ListView.builder(

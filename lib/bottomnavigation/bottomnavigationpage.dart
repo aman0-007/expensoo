@@ -54,21 +54,21 @@ class _FloatingBottomBarPageState extends State<FloatingBottomBarPage> {
             selectedColor: Colors.white,
             unselectedColor: Colors.blue,
           ),
-          MoltenTab(
-            icon: const Icon(Icons.add, color: Colors.white), // Plus icon is always white
-            selectedColor: Colors.white,
-            unselectedColor: Colors.blue, // This property is not used here as this tab is always selected
-          ),
-          MoltenTab(
-            icon: Icon(Icons.show_chart, color: _selectedIndex == 3 ? Colors.white : Colors.blue), // Non-selected icon color blue
-            selectedColor: Colors.white,
-            unselectedColor: Colors.blue,
-          ),
-          MoltenTab(
-            icon: Icon(Icons.person, color: _selectedIndex == 4 ? Colors.white : Colors.blue), // Non-selected icon color blue
-            selectedColor: Colors.white,
-            unselectedColor: Colors.blue,
-          ),
+          // MoltenTab(
+          //   icon: const Icon(Icons.add, color: Colors.white), // Plus icon is always white
+          //   selectedColor: Colors.white,
+          //   unselectedColor: Colors.blue, // This property is not used here as this tab is always selected
+          // ),
+          // MoltenTab(
+          //   icon: Icon(Icons.show_chart, color: _selectedIndex == 3 ? Colors.white : Colors.blue), // Non-selected icon color blue
+          //   selectedColor: Colors.white,
+          //   unselectedColor: Colors.blue,
+          // ),
+          // MoltenTab(
+          //   icon: Icon(Icons.person, color: _selectedIndex == 4 ? Colors.white : Colors.blue), // Non-selected icon color blue
+          //   selectedColor: Colors.white,
+          //   unselectedColor: Colors.blue,
+          // ),
         ],
       ),
     );
